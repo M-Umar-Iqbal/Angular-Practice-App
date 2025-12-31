@@ -1,0 +1,22 @@
+@if(isLoading()) {
+    <p>Loading...</p>
+} @else {
+@for(user of users(); track user.id) {
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title" >{{ user.name }}</h5>
+            <p class="card-text">{{ user.email }}</p>
+        </div>
+    </div>
+}
+
+<div class="col-4">
+    <ul>
+        <li *ngFor="let user of users(); let i = index">
+            {{ i }} {{ user.name }}
+        </li>
+    </ul>
+</div>
+}
+
+
