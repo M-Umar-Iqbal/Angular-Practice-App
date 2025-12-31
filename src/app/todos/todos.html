@@ -1,4 +1,14 @@
+<p>Add Todo</p>
+
+<!-- Two way data binding -->
+<p>{{todoTitle}}</p>
+<input type="text" [(ngModel)]="todoTitle" />
+
+<!-- One way data binding -->
+<input [type]="inputType" [value]="todoTitle" />
+
 <p>Todo List</p>
 @for(todoItem of todoItems(); track todoItem.id) {
+    <!-- Interpolation -->
     <p>{{ $index }} {{ todoItem.title }}</p>
 }

@@ -1,0 +1,30 @@
+<h1>Tabs Master</h1>
+<div class="nav nav-pills">
+    <div class="nav-item">
+      <button 
+      class="btn" 
+      [class.active]="currentTab() === 'tab1'" 
+      [ngClass]="currentTab() === 'tab1' ? 'btn-success' : 'btn-primary'"  
+      aria-current="page" 
+      (click)="setCurrentTab('tab1')">Tab 1
+    </button> 
+  </div>
+    <div class="nav-item">
+      <button 
+      class="btn" 
+      [class.active]="currentTab() === 'tab2'" 
+      [ngClass]="currentTab() === 'tab2' ? 'btn-success' : 'btn-primary'" 
+      aria-current="page"
+       (click)="setCurrentTab('tab2')" >Tab 2
+      </button>
+    </div>
+  </div>
+
+<div class="row">
+    <div class="col-12" *ngIf="currentTab() == 'tab1'">
+        <app-tab1 />
+    </div>
+    <div class="col-12" *ngIf="currentTab() == 'tab2'">
+        <app-tab2 />
+    </div>
+</div>

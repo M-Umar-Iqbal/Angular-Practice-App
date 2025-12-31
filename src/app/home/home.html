@@ -1,11 +1,13 @@
 <p>home works!</p>
 <app-greeting
 [message]="messageTitleFromHome()"
-messageDesc="Hello This is description" />
+messageDesc="Hello This is description"
+ />
 
 
 <!-- Call the function on key up -->
-<input type="text" (keyup)="keyUpHandler($event)" >
+<!-- <input type="text" (keyup)="keyUpHandler($event)" > -->
 
 <!-- Counter component -->
 <app-counter />
+<app-tabs-master />
