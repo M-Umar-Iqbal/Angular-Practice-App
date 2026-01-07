@@ -1,0 +1,198 @@
+<div class="container-fluid mt-4">
+    <div class="row g-4">
+        <!-- User Form Section -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">User Registration Form</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <!-- Personal Information Section -->
+                        <h5 class="text-muted mb-3 border-bottom pb-2">Personal Information</h5>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" [(ngModel)]="userObj.name" id="name" name="name" placeholder="Enter full name" />
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" [(ngModel)]="userObj.email" id="email" name="email" placeholder="example@email.com" />
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="age" class="form-label">Age</label>
+                                <input type="number" class="form-control" [(ngModel)]="userObj.age" id="age" name="age" placeholder="Age" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="gender" class="form-label">Gender</label>
+                                <input type="text" class="form-control" [(ngModel)]="userObj.gender" id="gender" name="gender" placeholder="Gender" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" [(ngModel)]="userObj.phone" id="phone" name="phone" placeholder="+1234567890" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="profession" class="form-label">Profession</label>
+                            <input type="text" class="form-control" [(ngModel)]="userObj.profession" id="profession" name="profession" placeholder="Your profession" />
+                        </div>
+
+                        <!-- Address Information Section -->
+                        <h5 class="text-muted mb-3 mt-4 border-bottom pb-2">Address Information</h5>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Street Address</label>
+                            <input type="text" class="form-control" [(ngModel)]="userObj.address" id="address" name="address" placeholder="Street address" />
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" [(ngModel)]="userObj.city" id="city" name="city" placeholder="City" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" class="form-control" [(ngModel)]="userObj.state" id="state" name="state" placeholder="State" />
+                            </div>
+                            <div class="col-md-4">
+                                <label for="zip" class="form-label">Zip Code</label>
+                                <input type="text" class="form-control" [(ngModel)]="userObj.zip" id="zip" name="zip" placeholder="Zip code" />
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country</label>
+                            <input type="text" class="form-control" [(ngModel)]="userObj.country" id="country" name="country" placeholder="Country" />
+                        </div>
+
+                        <!-- Additional Information Section -->
+                        <h5 class="text-muted mb-3 mt-4 border-bottom pb-2">Additional Information</h5>
+                        <div class="mb-3">
+                            <label for="website" class="form-label">Website</label>
+                            <input type="text" class="form-control" [(ngModel)]="userObj.website" id="website" name="website" placeholder="https://example.com" />
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Skills</label>
+                                <div class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
+                                    @for(skill of availableSkills; track skill) {
+                                        <div class="form-check">
+                                            <input 
+                                                class="form-check-input" 
+                                                type="checkbox" 
+                                                [id]="'skill-' + skill"
+                                                [checked]="isSkillSelected(skill)"
+                                                (change)="onSkillChange(skill, $event)" />
+                                            <label class="form-check-label" [for]="'skill-' + skill">
+                                                {{ skill }}
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Hobbies</label>
+                                <div class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
+                                    @for(hobby of availableHobbies; track hobby) {
+                                        <div class="form-check">
+                                            <input 
+                                                class="form-check-input" 
+                                                type="checkbox" 
+                                                [id]="'hobby-' + hobby"
+                                                [checked]="isHobbySelected(hobby)"
+                                                (change)="onHobbyChange(hobby, $event)" />
+                                            <label class="form-check-label" [for]="'hobby-' + hobby">
+                                                {{ hobby }}
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="button" class="btn btn-primary btn-lg" (click)="submitForm()">
+                                Submit Form
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Users List Section -->
+        <div class="col-lg-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0">
+                        Registered Users
+                        <span class="badge bg-light text-dark ms-2">{{ usersList().length }}</span>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    @if(usersList().length === 0) {
+                        <div class="alert alert-info text-center">
+                            No users registered yet. Fill out the form to add users.
+                        </div>
+                    } @else {
+                        <div class="list-group">
+                            @for(user of usersList(); track user.id) {
+                                <div class="list-group-item mb-2 border rounded">
+                                    <div class="d-flex w-100 justify-content-between align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h5 class="mb-2 text-primary">{{ user.name }}</h5>
+                                            <div class="row g-2">
+                                                <div class="col-12">
+                                                    <small class="text-muted">
+                                                        <strong>Email:</strong> {{ user.email }}
+                                                    </small>
+                                                </div>
+                                                @if(user.age) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Age:</strong> {{ user.age }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                                @if(user.gender) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Gender:</strong> {{ user.gender }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                                @if(user.profession) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Profession:</strong> {{ user.profession }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                                @if(user.phone) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Phone:</strong> {{ user.phone }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                                @if(user.city) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Location:</strong> {{ user.city }}{{ user.state ? ', ' + user.state : '' }}{{ user.country ? ', ' + user.country : '' }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                        <span class="badge bg-primary rounded-pill">#{{ user.id }}</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

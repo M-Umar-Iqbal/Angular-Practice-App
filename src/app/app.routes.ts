@@ -15,5 +15,10 @@ export const routes: Routes = [
         path: 'users',
         pathMatch: 'full',
         loadComponent: () => import('./users/users').then(m => m.Users)
+    },
+    {
+        path: 'user-form',
+        pathMatch: 'full',
+        loadComponent: () => import('./user-form/user-form').then(m => m.UserForm)
     }
 ];
