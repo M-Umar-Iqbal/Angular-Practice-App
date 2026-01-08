@@ -27,7 +27,11 @@
                             </div>
                             <div class="col-md-4">
                                 <label for="gender" class="form-label">Gender</label>
-                                <input type="text" class="form-control" [(ngModel)]="userObj.gender" id="gender" name="gender" placeholder="Gender" />
+                                <select class="form-control" [(ngModel)]="userObj.gender" id="gender" name="gender">
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Prefer not to say</option>
+                                </select>
                             </div>
                             <div class="col-md-4">
                                 <label for="phone" class="form-label">Phone</label>
@@ -203,7 +207,7 @@
                                                     <button class="btn btn-danger btn-sm" (click)="deleteUser(user._id)">Delete</button>
                                                 </div>
                                                 <div class="ms-2">
-                                                    <button class="btn btn-primary btn-sm" (click)="editUser(user._id)">Edit</button>
+                                                    <button class="btn btn-primary btn-sm" (click)="editUser(user)">Edit</button>
                                                 </div>
                                             </div>
                                         </div>

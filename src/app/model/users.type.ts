@@ -11,6 +11,9 @@ export type UserType = {
  phone: string;
  skills: string[];
  hobbies: string[];
+ website: string;
+ address: string;
+ zip: string;
 }
 
 export type UserResponse = {

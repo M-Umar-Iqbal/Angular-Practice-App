@@ -64,7 +64,9 @@ export class UserForm implements OnInit {
     this.usersService.addUser(this.userObj).subscribe({
       next: (response) => {
         if (response && response.success) {
-          this.usersList.set(response.data);
+          const newUsers = Array.isArray(response.data) ? response.data : [response.data];
+          this.usersList.update(prevUsers => [...prevUsers, ...newUsers]);
+          alert("User added successfully");
           this.userObj = new UserClass();
         }
       },
@@ -74,12 +76,22 @@ export class UserForm implements OnInit {
     })
   }
 
-  editUser(id: number) {
-    console.log("Editing user: ", id);
+  editUser(userData: UserClass) {
+    console.log("Editing user: ", userData);
   }
 
   deleteUser(id: number) {
-
+    this.usersService.deleteUser(id).subscribe({
+      next: (response) => {
+        if (response && response.success) {
+          alert("User deleted successfully");
+          this.usersList.update(prevUsers => prevUsers.filter(user => user._id !== id));
+        }
+      },
+      error: (error) => {
+        console.log("Error deleting user: ", error);
+      }
+    })
   }
 
   resetForm() {

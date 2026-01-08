@@ -1,21 +1,44 @@
 @if(isLoading()) {
     <p>Loading...</p>
 } @else {
-@for(user of users(); track user.id) {
+@for(user of users(); track user._id) {
     <div class="card">
         <div class="card-body">
             <h5 class="card-title" >{{ user.name }}</h5>
             <p class="card-text">{{ user.email }}</p>
+            <p class="card-text">{{ user.age }}</p>
+            <p class="card-text">{{ user.gender }}</p>
+            <p class="card-text">{{ user.profession }}</p>
+            <p class="card-text">{{ user.address }}</p>
+            <p class="card-text">{{ user.phone }}</p>
+            <p class="card-text">{{ user.city }}</p>
+            <p class="card-text">{{ user.state }}</p>
+            <p class="card-text">{{ user.zip }}</p>
+            <p class="card-text">{{ user.country }}</p>
+            <p class="card-text">{{ user.website }}</p>
+            <p class="card-text">{{ user.skills.join(', ') }}</p>
+            <p class="card-text">{{ user.hobbies.join(', ') }}</p>
         </div>
     </div>
 }
 
-<div class="col-4">
-    <ul>
-        <li *ngFor="let user of users(); let i = index">
-            {{ i }} {{ user.name }}
-        </li>
-    </ul>
+<div class="col-12">
+        <div *ngFor="let user of users(); let i = index" class="card m-2 p-2">
+            <div class="card-header">
+                #{{ i+1 }}
+            </div>
+            <div class="card-body">
+                <div>
+                    Name: {{ user.name }}
+                </div>
+                <div>
+                    Email: {{ user.email }}
+                </div>
+                <div>
+                    Phone: {{ user.phone }}
+                </div>
+            </div>
+        </div>
 </div>
 }
 
