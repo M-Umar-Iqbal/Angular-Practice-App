@@ -1,5 +1,4 @@
 export class UserClass {
-    id: number;
     name: string;
     email: string;
     age: number;
@@ -16,7 +15,6 @@ export class UserClass {
     hobbies: string[];
 
     constructor() {
-        this.id = 0;
         this.name = "";
         this.email = "";
         this.age = 0;

@@ -1,5 +1,5 @@
 export type UserType = {
- id: number;
+ _id: number;
  name: string;
  email: string;
  age: number;
@@ -9,6 +9,8 @@ export type UserType = {
  city: string;
  state: string;
  phone: string;
+ skills: string[];
+ hobbies: string[];
 }
 
 export type UserResponse = {

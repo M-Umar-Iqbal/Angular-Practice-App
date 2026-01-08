@@ -110,8 +110,9 @@
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="d-grid gap-2 mt-4">
-                            <button type="button" class="btn btn-primary btn-lg" (click)="submitForm()">
+                        <div class="d-grid gap-2 d-flex justify-content-between mt-4">
+                            <button type="button" class="btn btn-secondary btn-lg w-50" (click)="resetForm()">Reset Form</button>
+                            <button type="button" class="btn btn-primary btn-lg w-50" (click)="submitForm()">
                                 Submit Form
                             </button>
                         </div>
@@ -136,7 +137,7 @@
                         </div>
                     } @else {
                         <div class="list-group">
-                            @for(user of usersList(); track user.id) {
+                            @for(user of usersList(); track user._id) {
                                 <div class="list-group-item mb-2 border rounded">
                                     <div class="d-flex w-100 justify-content-between align-items-start">
                                         <div class="flex-grow-1">
@@ -182,9 +183,32 @@
                                                         </small>
                                                     </div>
                                                 }
+                                                @if(user.skills.length > 0) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Skills:</strong> {{ user.skills.join(', ') }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                                @if(user.hobbies.length > 0) {
+                                                    <div class="col-12">
+                                                        <small class="text-muted">
+                                                            <strong>Hobbies:</strong> {{ user.hobbies.join(', ') }}
+                                                        </small>
+                                                    </div>
+                                                }
+                                            </div>
+                                            <div class="d-flex mt-2">   
+                                                <div>
+                                                    <button class="btn btn-danger btn-sm" (click)="deleteUser(user._id)">Delete</button>
+                                                </div>
+                                                <div class="ms-2">
+                                                    <button class="btn btn-primary btn-sm" (click)="editUser(user._id)">Edit</button>
+                                                </div>
                                             </div>
                                         </div>
-                                        <span class="badge bg-primary rounded-pill">#{{ user.id }}</span>
+                                        <span class="badge bg-light text-dark rounded-pill">{{ user._id }}</span>
+
                                     </div>
                                 </div>
                             }

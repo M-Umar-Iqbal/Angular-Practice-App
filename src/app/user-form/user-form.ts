@@ -14,10 +14,15 @@ import { UsersService } from '../services/users';
 })
 export class UserForm implements OnInit {
   userObj: UserClass = new UserClass();
+
+  // User list from the API
   usersList = signal<UserType[]>([]);
+
+  // Users service, for fetching users from the API
   usersService = inject(UsersService);
   
   // Available options for skills and hobbies
+  // TODO: Fetch these from the API
   availableSkills = ['JavaScript', 'TypeScript', 'Angular', 'React', 'Vue', 'Node.js', 'Python', 'Java'];
   availableHobbies = ['Reading', 'Sports', 'Music', 'Travel', 'Photography', 'Cooking', 'Gaming', 'Dancing'];
 
@@ -56,13 +61,35 @@ export class UserForm implements OnInit {
   }
 
   submitForm() {
+    this.usersService.addUser(this.userObj).subscribe({
+      next: (response) => {
+        if (response && response.success) {
+          this.usersList.set(response.data);
+          this.userObj = new UserClass();
+        }
+      },
+      error: (error) => {
+        console.log("Error adding user: ", error);
+      }
+    })
+  }
+
+  editUser(id: number) {
+    console.log("Editing user: ", id);
+  }
+
+  deleteUser(id: number) {
+
+  }
+
+  resetForm() {
     this.userObj = new UserClass();
   }
 
   ngOnInit(): void {
     this.usersService.getUsers().subscribe({
       next: (response) => {
-        if (response && response.data) {
+        if (response && response.success && response.data) {
           this.usersList.set(response.data);
         }
       },
